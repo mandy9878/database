@@ -12,6 +12,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
+console.log(firebase.analytics())
 
 let myFlashcards = [ {
  
@@ -47,9 +48,20 @@ let myFlashcards = [ {
 
   // Make the database point to the location root -> deck -> flashcards
 // If the location doesn't exist is will be created
-firebase.database().ref('deck/flashcards'); 
+var temp = firebase.database().ref(); 
  
 // myFlashcards will be stored under flashcards in the database
 // Anything that was in this location will be overwritten
 // Thus, a write operation also does an update
 firebase.database().set(myFlashcards);
+
+
+firebase.database().set({
+    myFlashcards
+  }, function(error) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("success0")
+    }
+  });
